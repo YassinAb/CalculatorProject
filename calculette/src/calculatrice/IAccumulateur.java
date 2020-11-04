@@ -2,7 +2,7 @@ package calculatrice;
 
 public interface IAccumulateur {
 	
-	public void push();
+	public void push(Double nombreChoisi);
 	
 	public void drop();
 	
@@ -20,7 +20,7 @@ public interface IAccumulateur {
 	
 	public void backspace();
 	
-	public void accumuler(char character);
+	public void accumuler(String string);
 	
 	public void reset();
 

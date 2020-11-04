@@ -5,7 +5,7 @@ package calculatrice;
 
 public class Accumulateur implements IAccumulateur {
 	
-	double nombre;
+	
 	private  double pop1; // 1ere Variable de sauvegarde pour la méthode swap
 	private double pop2; // 2eme Variable de sauvegarde 
 	private Pile pile = new Pile();
@@ -15,8 +15,8 @@ public class Accumulateur implements IAccumulateur {
 	public Accumulateur() {	}
 
 	
-	public void push() {
-		pile.push(nombre);
+	public void push(Double nombreChoisi) {
+		pile.push(nombreChoisi);
 		
 	}
 
@@ -71,8 +71,8 @@ public class Accumulateur implements IAccumulateur {
 	}
 
 	
-	public void accumuler(char character) {
-		switch (character) {
+	public void accumuler(String string) {
+		/*switch (character) {
 			case '+': 
 				add();
 			case '-':
@@ -81,7 +81,12 @@ public class Accumulateur implements IAccumulateur {
 				div();
 			case '*':
 				mult();
-		}
+		}*/
+		
+		string = pile.pop().toString();
+		string += pile.pop().toString();
+		
+		
 		
 	}
 
@@ -90,6 +95,8 @@ public class Accumulateur implements IAccumulateur {
 		pile.clear();
 		
 	}
+
+
 	
 	
 }

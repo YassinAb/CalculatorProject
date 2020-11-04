@@ -8,8 +8,8 @@ public class Pile extends Stack<Double> {
 	public Pile() {
 		}
 	
-	public void push(double nombre) {
-		pile.push(nombre);
+	public void push(double nombreChoisi) {
+		pile.push(nombreChoisi);
 	}
 	
 	public Double pop() {
