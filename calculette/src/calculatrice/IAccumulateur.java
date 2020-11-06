@@ -20,9 +20,9 @@ public interface IAccumulateur {
 	
 	public void backspace();
 	
-	public void accumuler(String string);
+	public void accumuler(String nombreChoisi);
 	
 	public void reset();
-
+	
 	
 }

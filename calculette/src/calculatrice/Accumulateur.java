@@ -1,5 +1,6 @@
 package calculatrice;
 
+
 //import java.beans.PropertyChangeSupport;
 //import java.beans.PropertyChangeListener;
 
@@ -9,7 +10,6 @@ public class Accumulateur implements IAccumulateur {
 	private  double pop1; // 1ere Variable de sauvegarde pour la méthode swap
 	private double pop2; // 2eme Variable de sauvegarde 
 	private Pile pile = new Pile();
-	//PropertyChangeSupport pcs = new PropertyChangeSupport(Object listener );
 	
 	
 	public Accumulateur() {	}
@@ -36,7 +36,9 @@ public class Accumulateur implements IAccumulateur {
 
 	
 	public void add() {
+		//return pile.empty();
 		pile.push(pile.pop() + pile.pop());
+
 	}
 
 	
@@ -71,7 +73,7 @@ public class Accumulateur implements IAccumulateur {
 	}
 
 	
-	public void accumuler(String string) {
+	public void accumuler(String nombreChoisi) {
 		/*switch (character) {
 			case '+': 
 				add();
@@ -83,8 +85,11 @@ public class Accumulateur implements IAccumulateur {
 				mult();
 		}*/
 		
-		string = pile.pop().toString();
-		string += pile.pop().toString();
+		//string = pile.pop().toString();
+		//string += pile.pop().toString();
+		
+		double a= Double.parseDouble(nombreChoisi);
+		push(a);
 		
 		
 		
@@ -95,8 +100,17 @@ public class Accumulateur implements IAccumulateur {
 		pile.clear();
 		
 	}
+	
+	public  double peek() {
+		
+		return pile.peek();
+	}
 
 
-	
-	
 }
+	
+
+
+	
+	
+

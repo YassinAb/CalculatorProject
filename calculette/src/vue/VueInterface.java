@@ -1,8 +1,7 @@
 package vue;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,217 +18,152 @@ import controle.Controleur;
 
 public class VueInterface extends Application  {
 	
+	Controleur controleur = new Controleur();
 	
-	// test 
+	// création de tous les bouttons
 	
-
-	private Controleur controleur = new Controleur();
-
-	Button toucheDeux = new Button("2");
 	Button toucheZero = new Button("0");
+	Button toucheUn = new Button("1");
+	Button toucheDeux = new Button("2");
+	Button toucheTrois = new Button("3");
+	Button toucheQuatre = new Button("4");
+	Button toucheCinq = new Button("5");
+	Button toucheSix = new Button("6");
+	Button toucheSept = new Button("7");
+	Button toucheHuit = new Button("8");
+	Button toucheNeuf = new Button("9");
 	
-	
-	
+	Button toucheSoustraction = new Button("-");
+	Button toucheMultiplication = new Button("*");
+	Button toucheDivision = new Button("/");
+	Button toucheAccumuler = new Button("<>");
+	Button toucheVirgule = new Button(".");
+	Button toucheReset = new Button("C");	
 	Button toucheAddition = new Button("+");
+	Button toucheEffacer = new Button("<-");
+	Button toucheNeg = new Button("+/-");
+	
 	
 	public VueInterface(){
-		//toucheDeux.setMinSize(40, 40);
-		//toucheDeux.setOnAction(controleur::handle2);
+		toucheDeux.setMinSize(40, 40);
+		toucheDeux.setOnAction(controleur::handleDeux);
 		
 		
-
+		toucheUn.setMinSize(40, 40);
+		toucheUn.setOnAction(controleur::handleUn);
+		
 		toucheZero.setMinSize(40, 40);
 		toucheZero.setOnAction(controleur::handleZero);
-
+		
+		toucheTrois.setMinSize(40, 40);
+		toucheTrois.setOnAction(controleur::handleTrois);
+		
+		toucheQuatre.setMinSize(40, 40);
+		toucheQuatre.setOnAction(controleur::handleQuatre);
+		
+		toucheCinq.setMinSize(40, 40);
+		toucheCinq.setOnAction(controleur::handleCinq);
+		
+		toucheSix.setMinSize(40, 40);
+		toucheSix.setOnAction(controleur::handleSix);
+		
+		
+		toucheSept.setMinSize(40, 40);
+		toucheSept.setOnAction(controleur::handleSept);
+		
+		
+		toucheHuit.setMinSize(40, 40);
+		toucheHuit.setOnAction(controleur::handleHuit);
+		
+		toucheNeuf.setMinSize(40, 40);
+		toucheNeuf.setOnAction(controleur::handleNeuf);
+		
+		toucheSoustraction.setMinSize(40, 40);
+		toucheSoustraction.setOnAction(controleur::handleSoustraction);
+		
+		toucheDivision.setMinSize(40, 40);
+		toucheDivision.setOnAction(controleur::handleDivision);
+		
+		toucheMultiplication.setMinSize(40, 40);
+		toucheMultiplication.setOnAction(controleur::handleMultiplication);
 		
 		toucheAddition.setMinSize(40, 40);
 		toucheAddition.setOnAction(controleur::handleAddition);
 
-	}	
-	
-	 static Label ecranAffichage = new Label("");
-	 static Label pileDeux = new Label("pile[1]");
-	 static Label pileTrois = new Label("pile[2]");
-
+		toucheVirgule.setMinSize(40, 40);
+		toucheVirgule.setOnAction(controleur::handleVirgule);
 		
+		toucheEffacer.setMinSize(40, 40);
+		toucheEffacer.setOnAction(controleur::handleEffacer);
+		
+		toucheAccumuler.setMinSize(40, 40);
+		toucheAccumuler.setOnAction(controleur::handleAccumuler);
+		
+		toucheReset.setMinSize(40, 40);
+		toucheReset.setOnAction(controleur::handleReset);
+		
+		toucheNeg.setMinSize(40, 40);
+		toucheNeg.setOnAction(controleur::handleNeg);
+		
+		
+		
+	}	
 	
 	//création affichage de la pile
 	
-
+	
+	  
+	  static Label pileUn = new Label("");
+	  static Label pileDeux = new Label("");
+	  static Label pileTrois = new Label("");
+	  static Label ecranAffichage = new Label("");
 
 	
-	private static String texteDansAffichage;
+	public static void setEcranAffichage(String nombreChoisi) {   
+		ecranAffichage.setText(nombreChoisi);                                      
+	}
 	
-	public static  void setTexteDansAffichage(String  _texteDansAffichage) {
+/*	public static void rafraichirVue(String nombreChoisi) {
+		if(ecranAffichage.getText() != "") {
+			pileDeux.setText(nombreChoisi);
+		}
+		if(ecranAffichage.getText() != "" && pileDeux.getText() != "") {
+			pileTrois.setText(nombreChoisi);
+		}
+	} */
+	
+	
+	public static void refreshView(String[] affichage) {
 		
-		texteDansAffichage = _texteDansAffichage;
+			
+			pileUn.setText(affichage[0]);	
+		
+			pileDeux.setText(affichage[1]);
+			                                                  //maybe after we can put the ifs
+			pileTrois.setText(affichage[2]);
+	
+
 	}
 
-	 
 	
+
+
 	public void start(Stage primaryStage) throws Exception {
 			
 		primaryStage.setTitle("calculatrice Polonaise");
 		
 		
 		
-
-		
-		
 		// Architecture de la calculatrice
 		
 		VBox root = new VBox();
-		root.setPadding(new Insets(150)); // espace entre les VBox
+		root.setPadding(new Insets(40,10,10,10)); // espace entre les VBox
 		root.setAlignment(Pos.CENTER_RIGHT);
-		
-
-
-		
 		
 		// création du clavier
 		
-		GridPane plageNombres = new GridPane();	
-		
-		//affichage 
+		GridPane plageNombres = new GridPane();	 
 
-		 
-		 
-		
-		
-		
-		
-		// création de tous les bouttons
-		
-		
-		
-		
-		Button toucheUn = new Button("1");
-		toucheUn.setMinSize(40, 40);
-		toucheUn.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				
-				
-				ecranAffichage.setText(texteDansAffichage);
-			}
-		});
-				
-		
-		//toucheDeux.setMinSize(40, 40);
-		
-
-				
-		
-		/*toucheDeux.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			
-			public void handle(ActionEvent e) {
-				ecranAffichage.setText(Controleur.toucheDeux());
-			}
-			
-		}); */
-		
-		Button toucheTrois = new Button("3");
-		toucheTrois.setMinSize(40, 40);
-		
-		
-		Button toucheQuatre = new Button("4");
-		toucheQuatre.setMinSize(40, 40);
-		toucheQuatre.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				texteDansAffichage +=4 ;
-				ecranAffichage.setText(texteDansAffichage);
-						
-			}
-		});	
-		
-		Button toucheCinq = new Button("5");
-		toucheCinq.setMinSize(40, 40);
-		toucheCinq.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				setTexteDansAffichage("5");
-				ecranAffichage.setText(texteDansAffichage);
-						
-			}
-		});		
-		
-		Button toucheSix = new Button("6");
-		toucheSix.setMinSize(40, 40);
-		toucheSix.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				setTexteDansAffichage("6");
-				ecranAffichage.setText(texteDansAffichage);			
-			}
-		});
-		Button toucheSept = new Button("7");
-		toucheSept.setMinSize(40, 40);
-		toucheSept.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				setTexteDansAffichage("7");
-				ecranAffichage.setText(texteDansAffichage);		
-			}
-		});
-
-
-		Button toucheHuit = new Button("8");
-		toucheHuit.setMinSize(40, 40);
-		toucheHuit.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				setTexteDansAffichage("8");
-				ecranAffichage.setText(texteDansAffichage);	
-			}
-		});
-		
-		Button toucheNeuf = new Button("9");
-		toucheNeuf.setMinSize(40, 40);
-		toucheNeuf.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				setTexteDansAffichage("9");
-				ecranAffichage.setText(texteDansAffichage);			
-			}
-		});
-				
-
-		
-		Button toucheSoustraction = new Button("-");
-		toucheSoustraction.setMinSize(40, 40);
-		toucheSoustraction.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.out.println("Vous avez additionné");	
-			}
-		});		
-		
-		Button toucheMultiplication = new Button("x");
-		toucheMultiplication.setMinSize(40, 40);
-		toucheMultiplication.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.out.println("Vous avez additionné");			
-			}
-		});
-		
-		Button toucheDivision = new Button("/");
-		toucheDivision.setMinSize(40, 40);
-		toucheDivision.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.out.println("Vous avez additionné");	
-			}
-		});		
-		
-		Button toucheEffacer = new Button("C");
-		toucheEffacer.setMinSize(40, 40);
-		toucheEffacer.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.out.println("Vous avez additionné");	
-			}
-		});
-		
-		Button toucheVirgule = new Button(",");
-		toucheVirgule.setMinSize(40, 40);
-		toucheVirgule.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				System.out.println("Vous avez additionné");	
-			}
-		});
-
-		
 		//espacement des touches
 
 		plageNombres.setPadding(new Insets(10,10,10,10));
@@ -244,33 +178,39 @@ public class VueInterface extends Application  {
 		plageNombres.add(toucheQuatre, 1, 1, 1, 1);
 		plageNombres.add(toucheCinq, 2, 1, 1, 1);
 		plageNombres.add(toucheSix, 3, 1, 1, 1);
-		plageNombres.add(toucheUn,1 , 2, 1, 1);
+		plageNombres.add(toucheUn,1 , 2, 1, 1); 
 		plageNombres.add(toucheDeux,2 , 2, 1, 1);
-		plageNombres.add(toucheTrois,3 , 2, 1, 1);                     //(element, placementButton, place occupée)
+		plageNombres.add(toucheTrois,3 , 2, 1, 1);                  
 		plageNombres.add(toucheVirgule, 1, 3, 1, 1);
 		plageNombres.add(toucheZero,2, 3, 1, 1);
-		plageNombres.add(toucheEffacer, 3, 3, 1, 1);
+		plageNombres.add(toucheReset, 3, 3, 1, 1);
 		plageNombres.add(toucheAddition,4,0,1,1);
 		plageNombres.add(toucheSoustraction,4,1,1,1);
 		plageNombres.add(toucheMultiplication,4,2,1,1);
-		plageNombres.add(toucheDivision,4,3,1,1);
+		plageNombres.add(toucheDivision,4,3,1,1); 
+		plageNombres.add(toucheAccumuler, 4,4,1,1);
+		plageNombres.add(toucheEffacer, 3,4,1,1 );
+		plageNombres.add(toucheNeg, 2, 4,1,1);
 		
-
 		// affichage de la fenêtre; avec création d'une scène et choix de ses dimentions
 		
-		root.getChildren().addAll(ecranAffichage,pileDeux, pileTrois, plageNombres);
+		root.getChildren().addAll(ecranAffichage,pileUn,pileDeux, pileTrois, plageNombres);
 
-		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
+
 	}
-	
 	
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+
+
+
+
+
+
 
 }
