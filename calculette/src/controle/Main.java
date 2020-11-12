@@ -1,14 +1,16 @@
 package controle;
 
-import calculatrice.Accumulateur;
-import vue.VueInterface;
+import javafx.application.Application;
+import modèle.Accumulateur;
+import vue.GUI;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Accumulateur accumul = new Accumulateur();
-		VueInterface vue = new VueInterface();
-		//Controleur controle = new Controleur();
+		GUI vue = new GUI();
+		
+		
 	    
 		
 

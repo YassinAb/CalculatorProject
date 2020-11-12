@@ -1,8 +1,8 @@
-package calculatrice;
+package modèle;
 
 public interface IAccumulateur {
 	
-	public void push(Double nombreChoisi);
+	public void push(double nombreChoisi);
 	
 	public void drop();
 	
@@ -23,6 +23,10 @@ public interface IAccumulateur {
 	public void accumuler(String nombreChoisi);
 	
 	public void reset();
+	
+	public  double peek();
+	
+	public int taille();
 	
 	
 }

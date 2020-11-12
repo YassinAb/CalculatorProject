@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 
@@ -16,11 +17,11 @@ import javafx.stage.Stage;
 import controle.Controleur;
 
 
-public class VueInterface extends Application  {
+public class GUI extends Application  {
 	
 	Controleur controleur = new Controleur();
 	
-	// création de tous les bouttons
+	// création de tous les boutons
 	
 	Button toucheZero = new Button("0");
 	Button toucheUn = new Button("1");
@@ -44,7 +45,7 @@ public class VueInterface extends Application  {
 	Button toucheNeg = new Button("+/-");
 	
 	
-	public VueInterface(){
+	public GUI(){
 		toucheDeux.setMinSize(40, 40);
 		toucheDeux.setOnAction(controleur::handleDeux);
 		
@@ -111,35 +112,35 @@ public class VueInterface extends Application  {
 	
 	//création affichage de la pile
 	
-	
-	  
-	  static Label pileUn = new Label("");
-	  static Label pileDeux = new Label("");
-	  static Label pileTrois = new Label("");
-	  static Label ecranAffichage = new Label("");
+	static Label pileUn = new Label("");
+	static Label pileDeux = new Label("");
+	static Label pileTrois = new Label("");
+	static Label ecranAffichage = new Label("");
+	Line line0 = new Line(300,150,500,150);
+	Line line1 = new Line(300,150,500,150);
+	Line line2 = new Line(300,150,500,150);
+
+
 
 	
+	public static String getEcranAffichage() {
+		return ecranAffichage.getText();
+	}
+
 	public static void setEcranAffichage(String nombreChoisi) {   
 		ecranAffichage.setText(nombreChoisi);                                      
 	}
 	
-/*	public static void rafraichirVue(String nombreChoisi) {
-		if(ecranAffichage.getText() != "") {
-			pileDeux.setText(nombreChoisi);
-		}
-		if(ecranAffichage.getText() != "" && pileDeux.getText() != "") {
-			pileTrois.setText(nombreChoisi);
-		}
-	} */
+
 	
 	
-	public static void refreshView(String[] affichage) {
+	public static void nouvelleVue(String[] affichage) {
 		
 			
 			pileUn.setText(affichage[0]);	
 		
 			pileDeux.setText(affichage[1]);
-			                                                  //maybe after we can put the ifs
+			                                                  
 			pileTrois.setText(affichage[2]);
 	
 
@@ -158,7 +159,7 @@ public class VueInterface extends Application  {
 		
 		VBox root = new VBox();
 		root.setPadding(new Insets(40,10,10,10)); // espace entre les VBox
-		root.setAlignment(Pos.CENTER_RIGHT);
+		root.setAlignment(Pos.CENTER);
 		
 		// création du clavier
 		
@@ -167,6 +168,7 @@ public class VueInterface extends Application  {
 		//espacement des touches
 
 		plageNombres.setPadding(new Insets(10,10,10,10));
+		plageNombres.setAlignment(Pos.CENTER);
 		plageNombres.setHgap(10);
 		plageNombres.setVgap(10);
 		
@@ -194,7 +196,7 @@ public class VueInterface extends Application  {
 		
 		// affichage de la fenêtre; avec création d'une scène et choix de ses dimentions
 		
-		root.getChildren().addAll(ecranAffichage,pileUn,pileDeux, pileTrois, plageNombres);
+		root.getChildren().addAll(ecranAffichage,line0,pileUn,line1,pileDeux,line2, pileTrois, plageNombres);
 
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);

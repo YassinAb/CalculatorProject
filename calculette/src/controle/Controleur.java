@@ -1,238 +1,209 @@
 package controle;
 
 
+
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
-
-import calculatrice.Accumulateur;
 import javafx.event.ActionEvent;
-import vue.VueInterface;
+import modèle.Accumulateur;
+import modèle.IAccumulateur;
+import vue.GUI;
 
 public class Controleur  {
 	
-	Accumulateur accumulateur = new Accumulateur();
 	
-	
+	IAccumulateur accumulateur = new Accumulateur();   		 // Instanciation de la classe accumulateur
 
+	private String nombreChoisi="" ;               		    // Chiffre séléctionné et retourner dans les méthodes handleNuméro
+	String[] affichage = {"","",""};						// liste des trois derniers chiffres accumulés
+	List<String> stockageTemporaire = new ArrayList<>();	/* Lorsque affichage est pleine et que l'on accumule un nouveau chiffre
+															   alors le premier élément accumulé dans affichage se retrouve dans cette liste*/
+	public Controleur() {}
 	
-	
-	private String nombreChoisi="" ;
-	
-	String[] affichage = {"","",""};
-	List<String> stockageTemporaire = new ArrayList<>();
-	
-	public void placerAffichage(String nombreChoisi) {
-		
-		if (affichage[2]=="") {
-			
-			affichage[2]= nombreChoisi;
-	
-		}
-	
-		else if (affichage[1]=="") {
-			
-			affichage[1]= nombreChoisi;
-			
-		}
-			                                                  //maybe after we can put the ifs
-		else if (affichage[0]=="") {
-			
-			affichage[0]= nombreChoisi;
-	
-		}
-		
-		else if (affichage[0]!="" && affichage[1]!="" && affichage[2]!="") {
-			stockageTemporaire.add(affichage[2]);
-			affichage[2]= affichage[1];
-			affichage[1]= affichage[0];
-			affichage[0]= nombreChoisi;
-		}
-	}
-	
+// Création des méthodes handle liées aux actions sur les boutons *********************************************************************************************************************************************************
 	
 	public void handleZero(ActionEvent event) {
-		nombreChoisi += "0";
-		//accumulateur.push(0.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		nombreChoisi += "0";                       
+		GUI.setEcranAffichage(nombreChoisi);        // affiche sur l'écran la valeur liée à la méthode
 	}
 	
 
 	public void handleUn(ActionEvent event) {
 		nombreChoisi+="1";
-		//accumulateur.push(1.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		GUI.setEcranAffichage(nombreChoisi);
 	}
 	
+	
 	public void handleDeux(ActionEvent event) {
-		
 		nombreChoisi+="2";
-		//accumulateur.push(2.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-
+		GUI.setEcranAffichage(nombreChoisi);
 	}
+	
 	
 	public void handleTrois(ActionEvent event) {
 		nombreChoisi+="3";
-		//accumulateur.push(3.0);
-		//VueInterface.rafraichirVue(nombreChoisi);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		GUI.setEcranAffichage(nombreChoisi);	
 	}
+	
 	
 	public void handleQuatre(ActionEvent event) {
 		nombreChoisi+="4";
-		//accumulateur.push(4.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		//VueInterface.rafraicheVue(nombreChoisi)
-		
+		GUI.setEcranAffichage(nombreChoisi);
 	}
+	
 	
 	public void handleCinq(ActionEvent event) {
 		nombreChoisi+=5;
-		//accumulateur.push(5.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		GUI.setEcranAffichage(nombreChoisi);
 	}
+	
 	
 	public void handleSix(ActionEvent event) {
 		nombreChoisi+="6";
-		//accumulateur.push(6.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		GUI.setEcranAffichage(nombreChoisi);
 	}
+	
 	
 	public void handleSept(ActionEvent event) {
 		nombreChoisi+="7";
-		//accumulateur.push(7.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		GUI.setEcranAffichage(nombreChoisi);
 	}
+	
 	
 	public void handleHuit(ActionEvent event) {
 		nombreChoisi+="8";
-		//accumulateur.push(8.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		GUI.setEcranAffichage(nombreChoisi);
 	}
+	
 	
 	public void handleNeuf(ActionEvent event) {
-		nombreChoisi+=9;
-		//accumulateur.push(9.0);
-		VueInterface.setEcranAffichage(nombreChoisi);
-		
+		nombreChoisi+="9";
+		GUI.setEcranAffichage(nombreChoisi);	
 	}
 	
+	/* On place la valeur accumulée dans les trois affichage possible 
+	   en fonction de l'emplacement disponible */
 	
+	public void placerAffichage(String nombreChoisi) {
+		
+		if (affichage[0]=="") {	
+			affichage[0]= nombreChoisi;
+		}
 	
+		else if (affichage[1]=="") {
+			affichage[1]= nombreChoisi;
+		}
+			                                                  
+		else if (affichage[2]=="") {
+			affichage[2]= nombreChoisi;
+		}
+		
+		/* On stocke les elements de la pile dans une ArrayList 
+		   temporaire lorsque l'on accumule un nombre mais qu'il n'y a plus de place*/
+		
+		else if (affichage[2]!="" && affichage[1]!="" && affichage[0]!="") {
+			stockageTemporaire.add(affichage[0]);
+			affichage[0]= affichage[1];
+			affichage[1]= affichage[2];
+			affichage[2]= nombreChoisi;
+		}
+	}
+	
+	/* On actualise le placement après chaque accumulation ou opération.Lorsqu'un emplacement d'affichage
+	 se libère, si une valeur est cachée dans stockageTemporaire alors actualise le placement*/
 	
 	public void actualiserPlacementAffichage (String string) {
-		if (affichage[0]!="") {
-			if (! stockageTemporaire.isEmpty()) {
-				
+		if (affichage[2]!="") {
+			if (! stockageTemporaire.isEmpty()) {                 //valeur cachée: on décale l'affiche
 				int taille= stockageTemporaire.size();
-				affichage[0]=string;
-				affichage[1]= affichage[2];
-				affichage[2]=stockageTemporaire.get(taille-1);
-				stockageTemporaire.remove(taille-1);
-				
+				affichage[2]=string;
+				affichage[1]= affichage[0];
+				affichage[0]=stockageTemporaire.get(taille-1);
+				stockageTemporaire.remove(taille-1);	
 			}
 			
 			else {
 				affichage[1]=string;
-				affichage[0]="";
+				affichage[2]="";
 			}
-		
-
 		}
+		
 		else if (affichage[1]!="") {
 			affichage[1]="";
-			affichage[2]=string;
-			
-
+			affichage[0]=string;
 		}
 	}
 	
 	
+//Les méthodes pour les opérations********************************************************************************
 	
 	
 	public void handleAddition(ActionEvent event) {
-		try {
+		if (accumulateur.taille()>=2) {	
 			accumulateur.add();
-		double a = accumulateur.peek();
-		String string = String.valueOf(a);
-		//placerAffichage(string);
-		
-		actualiserPlacementAffichage( string);
-		
-		VueInterface.refreshView(affichage);
-		VueInterface.setEcranAffichage(string);
-
-		
+			double a = accumulateur.peek();
+			String string = String.valueOf(a);      // On a des listes de String donc on transforme le double récuperé dans la pile
+			actualiserPlacementAffichage(string);							
+			GUI.nouvelleVue(affichage);
+			GUI.setEcranAffichage(""); 
+		}		
+		else {															
+			GUI.setEcranAffichage("Accumuler au moins deux chiffres");
+			nombreChoisi="";  //Permet d'effacer la valeur qui était affichée avant le message "Accumuler au moins deux chiffres"
 		}
-		
-		catch (EmptyStackException e) {
-			VueInterface.setEcranAffichage("Veuillez inserer un chiffre");
-			
-		}
-		
 	}
 	
 	
-	//à modifier...
+
 	
 	public void handleSoustraction(ActionEvent event) {
-		
-		try {
+		if(accumulateur.taille()>=2) {	
 			accumulateur.sub();
 			double a = accumulateur.peek();
 			String string = String.valueOf(a);
 			actualiserPlacementAffichage( string);			
-			VueInterface.refreshView(affichage);			
-			VueInterface.setEcranAffichage(string);
-			
-			
-			}
-		
-		catch (EmptyStackException e) {
-			
-			VueInterface.setEcranAffichage("Veuillez inserer un chiffre");
+			GUI.nouvelleVue(affichage);			
+			GUI.setEcranAffichage("");
+		}		
+		else {
+			GUI.setEcranAffichage("Accumuler au moins deux chiffres");
+			nombreChoisi="";
 		}
+		
 	}
 	
 	public void handleMultiplication(ActionEvent event) {
-		
-		try {
+		if(accumulateur.taille()>=2) {	
 			accumulateur.mult();
 			double a = accumulateur.peek();
 			String string = String.valueOf(a);
 			actualiserPlacementAffichage( string);			
-			VueInterface.refreshView(affichage);
-			VueInterface.setEcranAffichage(string);}
-		
-		catch (EmptyStackException e) {
-			
-			VueInterface.setEcranAffichage("Veuillez inserer un chiffre");
+			GUI.nouvelleVue(affichage);
+			GUI.setEcranAffichage("");
+		}		
+		else {
+			GUI.setEcranAffichage("Accumuler au moins deux chiffres");
+			nombreChoisi="";
 		}
+		
 	}
 	
 	
 	public void handleNeg(ActionEvent event) {
 		try{
-			accumulateur.neg();
-		
-		double a = accumulateur.peek();
-		String string = String.valueOf(a);
-		if (affichage[0]!="")      affichage[0]=string;
-		else if (affichage[1]!="") affichage[1]=string;
-		else if (affichage[2]!="") affichage[2]=string;
-		VueInterface.refreshView(affichage);
-		VueInterface.setEcranAffichage(string);
-		}
-		catch (EmptyStackException e) {
-			VueInterface.setEcranAffichage("Aucun chiffre inseré") ;
+			accumulateur.neg();		
+			double a = accumulateur.peek();
+			String string = String.valueOf(a);
+			if (affichage[2]!="")      affichage[2]=string;    // On change le signe de la dernière valeur accumulée
+			else if (affichage[1]!="") affichage[1]=string;
+			else if (affichage[0]!="") affichage[0]=string;
+			GUI.nouvelleVue(affichage);
+			GUI.setEcranAffichage("");
+			
+		}catch (EmptyStackException e) {                       // On catch le fait qu'il n'y est aucune valeur accumulée 
+			GUI.setEcranAffichage("Aucun chiffre accumulé") ;
+			nombreChoisi="";
 		}
 		
 	}
@@ -240,93 +211,90 @@ public class Controleur  {
 	
 	
 	public void handleDivision(ActionEvent event) {
-		
-		try {
-			
-			
-			try{
-				accumulateur.div();
-			
-			double a = accumulateur.peek();
-			String string = String.valueOf(a);
-			actualiserPlacementAffichage( string);			
-			VueInterface.refreshView(affichage);
-			VueInterface.setEcranAffichage(string);}
-			catch (ArithmeticException e) {
-				System.out.println("Division par 0 impossible");
-			}
-			}
-		
-		catch (EmptyStackException e) {
-			
-			VueInterface.setEcranAffichage("Veuillez inserer un chiffre");
-		}
-		
-		
-		//...
+		if (accumulateur.taille() >=2) {	
+				double a = accumulateur.peek();          /* On récupère la dernière valeur de la pile 
+														correspondant au dénominteur pour vérifier l'erreur de division par zéro*/
+				if (a!=0) {
+					accumulateur.div();			
+					double c = accumulateur.peek();
+					String string2 = String.valueOf(c);
+					actualiserPlacementAffichage( string2);			
+					GUI.nouvelleVue(affichage);
+					GUI.setEcranAffichage("");
+				}
+				else {
+					GUI.setEcranAffichage("Division par zéro impossible");
+				}
+		}		
+		else {
+			GUI.setEcranAffichage("Accumuler au moins deux chiffres");
+			nombreChoisi="";
+		}				
 	}
+	
+	
 	
 	public void handleEffacer(ActionEvent event) {
 		try {
-			accumulateur.backspace();
-			if (affichage[0]!="") {
-				if (! stockageTemporaire.isEmpty()) {
-					int taille= stockageTemporaire.size();
-					affichage[0]= affichage[1];
-					affichage[1]= affichage[2];
-					affichage[2]= stockageTemporaire.get(taille-1);
-					stockageTemporaire.remove(taille-1);
-				
-				}
-				else affichage[0]="";
-
+			if (GUI.getEcranAffichage().length() > 0) { 												//S'il y a des éléments dans l'écran d'affichage alors on backspace le dernier caractère
+				nombreChoisi=GUI.getEcranAffichage().substring(0, GUI.getEcranAffichage().length() - 1);
+				GUI.setEcranAffichage(nombreChoisi);
 			}
-			else if (affichage[1]!="") affichage[1]="";
-			else if (affichage[2]!="") affichage[2]="";
-			VueInterface.refreshView(affichage);
-			VueInterface.setEcranAffichage("");
-		}
-		catch (ArrayIndexOutOfBoundsException e) {
-			VueInterface.setEcranAffichage("Veuillez inserer un chiffre");
+			else {                                                //Dans ce cas, on supprime le dernier élément accumulé
+				accumulateur.backspace();
+				if (affichage[2]!="") {
+					if (! stockageTemporaire.isEmpty()) {
+						int taille= stockageTemporaire.size();
+						affichage[2]= affichage[1];
+						affichage[1]= affichage[0];
+						affichage[0]= stockageTemporaire.get(taille-1);
+						stockageTemporaire.remove(taille-1);
+					}
+					else affichage[2]="";
+				}
+				else if (affichage[1]!="") affichage[1]="";
+				else if (affichage[0]!="") affichage[0]="";
+				GUI.nouvelleVue(affichage);
+				GUI.setEcranAffichage("");
+			}
+			
+		}catch (ArrayIndexOutOfBoundsException e) {						//Aucune valeur dans l'écran d'affiche et dans les 3 stockages de valeurs accumulées 
+			GUI.setEcranAffichage("Veuillez inserer un chiffre");
 		}
 	}
 	
-	public void handleReset(ActionEvent event) {
+	
+	
+	public void handleReset(ActionEvent event) {    //On efface tout à l'aide de clear puis on acualise l'affichage
 		accumulateur.reset();
 		affichage[0]="";
 		affichage[1]="";
 		affichage[2]="";
 		nombreChoisi="";
 		stockageTemporaire.clear();
-		VueInterface.refreshView(affichage);
-		VueInterface.setEcranAffichage(nombreChoisi);
+		GUI.nouvelleVue(affichage);
+		GUI.setEcranAffichage(nombreChoisi);
 		
 	}
 	
 	public void handleAccumuler(ActionEvent event) {
 		
-		try {
+		try {                                                 
 			accumulateur.accumuler(nombreChoisi);                                                                                               
-			placerAffichage(nombreChoisi);                                                                        
-			VueInterface.refreshView(affichage);
-			nombreChoisi="";
+			placerAffichage(nombreChoisi);              //On place le double dans le stock d'affichage                                                           
+			GUI.nouvelleVue(affichage);
+			nombreChoisi="";                            
+			GUI.setEcranAffichage(nombreChoisi);   		//On le supprime de l'écran d'affichage
 			
-		}
-		catch (NumberFormatException e) {
-			VueInterface.setEcranAffichage("veuillez sélectionner un chiffre");
-			
-		}
-		
-		
+		}catch (NumberFormatException e) {
+			GUI.setEcranAffichage("veuillez sélectionner un chiffre");	
+		}	
 	}
 	
 	public void handleVirgule(ActionEvent event) {
 		nombreChoisi+=".";
-		VueInterface.setEcranAffichage(nombreChoisi);
-				
+		GUI.setEcranAffichage(nombreChoisi);			
 	}
-
-
 }
 	
 

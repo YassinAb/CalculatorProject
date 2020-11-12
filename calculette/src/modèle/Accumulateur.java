@@ -1,49 +1,47 @@
-package calculatrice;
+package modèle;
 
-
-//import java.beans.PropertyChangeSupport;
-//import java.beans.PropertyChangeListener;
 
 public class Accumulateur implements IAccumulateur {
 	
 	
-	private  double pop1; // 1ere Variable de sauvegarde pour la méthode swap
-	private double pop2; // 2eme Variable de sauvegarde 
+	
 	private Pile pile = new Pile();
 	
 	
 	public Accumulateur() {	}
 
+	public int taille() {
+		return pile.size();
+	}
 	
-	public void push(Double nombreChoisi) {
+	public void push(double nombreChoisi) {
 		pile.push(nombreChoisi);
 		
 	}
 
-	
 	public void drop() {
 		pile.drop();
 	}
 
 	
 	public void swap() {
-		pop1= pile.pop();
-		pop2= pile.pop();
-		pile.push(pop2);
+		double pop1= pile.pop();
+		double pop2= pile.pop();
 		pile.push(pop1);
+		pile.push(pop2);
 		
 	}
 
 	
 	public void add() {
-		//return pile.empty();
 		pile.push(pile.pop() + pile.pop());
-
 	}
 
 	
 	public void sub() {
-		pile.push(pile.pop() - pile.pop());
+		double pop1= pile.pop();
+		double pop2= pile.pop();
+		pile.push(pop2 - pop1);
 		
 	}
 
@@ -55,9 +53,8 @@ public class Accumulateur implements IAccumulateur {
 
 	
 	public void div() {
-		swap();
-		pile.push(pile.pop() / pile.pop());
-		
+			swap();
+		    pile.push(pile.pop()/ pile.pop());
 	}
 
 	
@@ -74,25 +71,8 @@ public class Accumulateur implements IAccumulateur {
 
 	
 	public void accumuler(String nombreChoisi) {
-		/*switch (character) {
-			case '+': 
-				add();
-			case '-':
-				sub();
-			case '/': 
-				div();
-			case '*':
-				mult();
-		}*/
-		
-		//string = pile.pop().toString();
-		//string += pile.pop().toString();
-		
 		double a= Double.parseDouble(nombreChoisi);
 		push(a);
-		
-		
-		
 	}
 
 
