@@ -3,17 +3,19 @@ package modèle;
 import java.util.Stack;
 
 
-public class Pile {	
+public class Pile extends Stack {	
 	
+	
+
 	Stack <Double> pile = new Stack <>();
 
 	public Pile() {}
 	
-	public void push(double nombreChoisi) {
+	public void push(Double nombreChoisi) {
 		pile.push(nombreChoisi);
 	}
 	
-	public double pop() {
+	public Double pop() {
 		return (pile.pop());	
 	}
 
@@ -25,7 +27,7 @@ public class Pile {
 		pile.clear();
 	}
 
-	public double peek(){
+	public Double peek(){
 		 return pile.peek();
 	}
 

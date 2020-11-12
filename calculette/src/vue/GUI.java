@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import controle.Controleur;
 
 
-public class GUI extends Application  {
+public class GUI extends Application {
 	
 	Controleur controleur = new Controleur();
 	
@@ -39,9 +39,9 @@ public class GUI extends Application  {
 	Button toucheDivision = new Button("/");
 	Button toucheAccumuler = new Button("<>");
 	Button toucheVirgule = new Button(".");
-	Button toucheReset = new Button("C");	
+	Button toucheReset = new Button("AC");	
 	Button toucheAddition = new Button("+");
-	Button toucheEffacer = new Button("<-");
+	Button toucheEffacer = new Button("C");
 	Button toucheNeg = new Button("+/-");
 	
 	
@@ -111,6 +111,7 @@ public class GUI extends Application  {
 	}	
 	
 	//création affichage de la pile
+	
 	
 	static Label pileUn = new Label("");
 	static Label pileDeux = new Label("");
@@ -185,18 +186,18 @@ public class GUI extends Application  {
 		plageNombres.add(toucheTrois,3 , 2, 1, 1);                  
 		plageNombres.add(toucheVirgule, 1, 3, 1, 1);
 		plageNombres.add(toucheZero,2, 3, 1, 1);
-		plageNombres.add(toucheReset, 3, 3, 1, 1);
+		plageNombres.add(toucheEffacer, 3, 3, 1, 1);
 		plageNombres.add(toucheAddition,4,0,1,1);
 		plageNombres.add(toucheSoustraction,4,1,1,1);
 		plageNombres.add(toucheMultiplication,4,2,1,1);
 		plageNombres.add(toucheDivision,4,3,1,1); 
 		plageNombres.add(toucheAccumuler, 4,4,1,1);
-		plageNombres.add(toucheEffacer, 3,4,1,1 );
+		plageNombres.add(toucheReset, 3,4,1,1 );
 		plageNombres.add(toucheNeg, 2, 4,1,1);
 		
 		// affichage de la fenêtre; avec création d'une scène et choix de ses dimentions
 		
-		root.getChildren().addAll(ecranAffichage,line0,pileUn,line1,pileDeux,line2, pileTrois, plageNombres);
+		root.getChildren().addAll(pileUn,line1,pileDeux,line2, pileTrois,line0,ecranAffichage, plageNombres);
 
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);

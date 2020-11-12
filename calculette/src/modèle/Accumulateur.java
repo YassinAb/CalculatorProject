@@ -14,7 +14,7 @@ public class Accumulateur implements IAccumulateur {
 		return pile.size();
 	}
 	
-	public void push(double nombreChoisi) {
+	public void push(Double nombreChoisi) {
 		pile.push(nombreChoisi);
 		
 	}
@@ -25,8 +25,8 @@ public class Accumulateur implements IAccumulateur {
 
 	
 	public void swap() {
-		double pop1= pile.pop();
-		double pop2= pile.pop();
+		Double pop1= pile.pop();
+		Double pop2= pile.pop();
 		pile.push(pop1);
 		pile.push(pop2);
 		
@@ -39,8 +39,8 @@ public class Accumulateur implements IAccumulateur {
 
 	
 	public void sub() {
-		double pop1= pile.pop();
-		double pop2= pile.pop();
+		Double pop1= pile.pop();
+		Double pop2= pile.pop();
 		pile.push(pop2 - pop1);
 		
 	}
@@ -71,7 +71,7 @@ public class Accumulateur implements IAccumulateur {
 
 	
 	public void accumuler(String nombreChoisi) {
-		double a= Double.parseDouble(nombreChoisi);
+		Double a= Double.parseDouble(nombreChoisi);
 		push(a);
 	}
 
@@ -81,7 +81,7 @@ public class Accumulateur implements IAccumulateur {
 		
 	}
 	
-	public  double peek() {
+	public  Double peek() {
 		
 		return pile.peek();
 	}

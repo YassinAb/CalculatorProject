@@ -2,7 +2,7 @@ package modèle;
 
 public interface IAccumulateur {
 	
-	public void push(double nombreChoisi);
+	public void push(Double nombreChoisi);
 	
 	public void drop();
 	
@@ -24,7 +24,7 @@ public interface IAccumulateur {
 	
 	public void reset();
 	
-	public  double peek();
+	public  Double peek();
 	
 	public int taille();
 	

@@ -10,21 +10,23 @@ import modèle.Accumulateur;
 import modèle.IAccumulateur;
 import vue.GUI;
 
+
 public class Controleur  {
 	
 	
 	IAccumulateur accumulateur = new Accumulateur();   		 // Instanciation de la classe accumulateur
-
+	
 	private String nombreChoisi="" ;               		    // Chiffre séléctionné et retourner dans les méthodes handleNuméro
 	String[] affichage = {"","",""};						// liste des trois derniers chiffres accumulés
 	List<String> stockageTemporaire = new ArrayList<>();	/* Lorsque affichage est pleine et que l'on accumule un nouveau chiffre
 															   alors le premier élément accumulé dans affichage se retrouve dans cette liste*/
 	public Controleur() {}
 	
+	
 // Création des méthodes handle liées aux actions sur les boutons *********************************************************************************************************************************************************
 	
 	public void handleZero(ActionEvent event) {
-		nombreChoisi += "0";                       
+		nombreChoisi+="0";                       
 		GUI.setEcranAffichage(nombreChoisi);        // affiche sur l'écran la valeur liée à la méthode
 	}
 	
@@ -54,7 +56,7 @@ public class Controleur  {
 	
 	
 	public void handleCinq(ActionEvent event) {
-		nombreChoisi+=5;
+		nombreChoisi+="5";
 		GUI.setEcranAffichage(nombreChoisi);
 	}
 	
@@ -142,7 +144,7 @@ public class Controleur  {
 	public void handleAddition(ActionEvent event) {
 		if (accumulateur.taille()>=2) {	
 			accumulateur.add();
-			double a = accumulateur.peek();
+			Double a = accumulateur.peek();
 			String string = String.valueOf(a);      // On a des listes de String donc on transforme le double récuperé dans la pile
 			actualiserPlacementAffichage(string);							
 			GUI.nouvelleVue(affichage);
@@ -160,7 +162,7 @@ public class Controleur  {
 	public void handleSoustraction(ActionEvent event) {
 		if(accumulateur.taille()>=2) {	
 			accumulateur.sub();
-			double a = accumulateur.peek();
+			Double a = accumulateur.peek();
 			String string = String.valueOf(a);
 			actualiserPlacementAffichage( string);			
 			GUI.nouvelleVue(affichage);			
@@ -176,7 +178,7 @@ public class Controleur  {
 	public void handleMultiplication(ActionEvent event) {
 		if(accumulateur.taille()>=2) {	
 			accumulateur.mult();
-			double a = accumulateur.peek();
+			Double a = accumulateur.peek();
 			String string = String.valueOf(a);
 			actualiserPlacementAffichage( string);			
 			GUI.nouvelleVue(affichage);
@@ -193,7 +195,7 @@ public class Controleur  {
 	public void handleNeg(ActionEvent event) {
 		try{
 			accumulateur.neg();		
-			double a = accumulateur.peek();
+			Double a = accumulateur.peek();
 			String string = String.valueOf(a);
 			if (affichage[2]!="")      affichage[2]=string;    // On change le signe de la dernière valeur accumulée
 			else if (affichage[1]!="") affichage[1]=string;
@@ -212,11 +214,11 @@ public class Controleur  {
 	
 	public void handleDivision(ActionEvent event) {
 		if (accumulateur.taille() >=2) {	
-				double a = accumulateur.peek();          /* On récupère la dernière valeur de la pile 
+				Double a = accumulateur.peek();          /* On récupère la dernière valeur de la pile 
 														correspondant au dénominteur pour vérifier l'erreur de division par zéro*/
 				if (a!=0) {
 					accumulateur.div();			
-					double c = accumulateur.peek();
+					Double c = accumulateur.peek();
 					String string2 = String.valueOf(c);
 					actualiserPlacementAffichage( string2);			
 					GUI.nouvelleVue(affichage);
@@ -236,7 +238,7 @@ public class Controleur  {
 	
 	public void handleEffacer(ActionEvent event) {
 		try {
-			if (GUI.getEcranAffichage().length() > 0) { 												//S'il y a des éléments dans l'écran d'affichage alors on backspace le dernier caractère
+			if (GUI.getEcranAffichage().length() > 0 && !GUI.getEcranAffichage().contains("e")) { 												//S'il y a des éléments dans l'écran d'affichage alors on backspace le dernier caractère
 				nombreChoisi=GUI.getEcranAffichage().substring(0, GUI.getEcranAffichage().length() - 1);
 				GUI.setEcranAffichage(nombreChoisi);
 			}
@@ -259,7 +261,7 @@ public class Controleur  {
 			}
 			
 		}catch (ArrayIndexOutOfBoundsException e) {						//Aucune valeur dans l'écran d'affiche et dans les 3 stockages de valeurs accumulées 
-			GUI.setEcranAffichage("Veuillez inserer un chiffre");
+			GUI.setEcranAffichage("");
 		}
 	}
 	
@@ -287,7 +289,7 @@ public class Controleur  {
 			GUI.setEcranAffichage(nombreChoisi);   		//On le supprime de l'écran d'affichage
 			
 		}catch (NumberFormatException e) {
-			GUI.setEcranAffichage("veuillez sélectionner un chiffre");	
+			GUI.setEcranAffichage("Veuillez sélectionner un chiffre");	
 		}	
 	}
 	
