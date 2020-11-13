@@ -138,11 +138,11 @@ public class GUI extends Application {
 	public static void nouvelleVue(String[] affichage) {
 		
 			
-			pileUn.setText(affichage[0]);	
+			pileUn.setText(affichage[2]);	
 		
 			pileDeux.setText(affichage[1]);
 			                                                  
-			pileTrois.setText(affichage[2]);
+			pileTrois.setText(affichage[0]);
 	
 
 	}

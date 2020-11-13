@@ -88,7 +88,26 @@ public class Controleur  {
 	   en fonction de l'emplacement disponible */
 	
 	public void placerAffichage(String nombreChoisi) {
+		if (affichage[0]=="") affichage[0]=nombreChoisi;
+		else {
+			if (affichage[1]!="" && affichage[2]!="") {
+				stockageTemporaire.add(affichage[2]);
+				affichage[2]= affichage[1];
+				affichage[1]= affichage[0];
+				affichage[0]= nombreChoisi;
+			}
+			else if (affichage[1]!="" && affichage[2]=="") {
+				affichage[2]= affichage[1];
+				affichage[1]= affichage[0];
+				affichage[0]= nombreChoisi;
+			}
+			else if (affichage[1]=="" && affichage[2]== "") {
+				affichage[1]= affichage[0];
+				affichage[0]= nombreChoisi;
+			}
 		
+		}
+		/*
 		if (affichage[0]=="") {	
 			affichage[0]= nombreChoisi;
 		}
@@ -101,15 +120,15 @@ public class Controleur  {
 			affichage[2]= nombreChoisi;
 		}
 		
-		/* On stocke les elements de la pile dans une ArrayList 
-		   temporaire lorsque l'on accumule un nombre mais qu'il n'y a plus de place*/
+		 On stocke les elements de la pile dans une ArrayList 
+		   temporaire lorsque l'on accumule un nombre mais qu'il n'y a plus de place
 		
 		else if (affichage[2]!="" && affichage[1]!="" && affichage[0]!="") {
 			stockageTemporaire.add(affichage[0]);
 			affichage[0]= affichage[1];
 			affichage[1]= affichage[2];
 			affichage[2]= nombreChoisi;
-		}
+		}*/
 	}
 	
 	/* On actualise le placement après chaque accumulation ou opération.Lorsqu'un emplacement d'affichage
@@ -119,19 +138,20 @@ public class Controleur  {
 		if (affichage[2]!="") {
 			if (! stockageTemporaire.isEmpty()) {                 //valeur cachée: on décale l'affiche
 				int taille= stockageTemporaire.size();
-				affichage[2]=string;
-				affichage[1]= affichage[0];
-				affichage[0]=stockageTemporaire.get(taille-1);
+				affichage[0]=string;
+				affichage[1]= affichage[2];
+				affichage[2]=stockageTemporaire.get(taille-1);
 				stockageTemporaire.remove(taille-1);	
 			}
 			
 			else {
-				affichage[1]=string;
-				affichage[2]="";
+				affichage[0]= string;
+				affichage[1]= affichage[2];
+				affichage[2]= "";
 			}
 		}
 		
-		else if (affichage[1]!="") {
+		else {
 			affichage[1]="";
 			affichage[0]=string;
 		}
@@ -197,9 +217,10 @@ public class Controleur  {
 			accumulateur.neg();		
 			Double a = accumulateur.peek();
 			String string = String.valueOf(a);
-			if (affichage[2]!="")      affichage[2]=string;    // On change le signe de la dernière valeur accumulée
+			/*if (affichage[2]!="")      affichage[2]=string;    // On change le signe de la dernière valeur accumulée
 			else if (affichage[1]!="") affichage[1]=string;
-			else if (affichage[0]!="") affichage[0]=string;
+			else if (affichage[0]!="") affichage[0]=string;*/
+			affichage[0]=string;
 			GUI.nouvelleVue(affichage);
 			GUI.setEcranAffichage("");
 			
@@ -244,18 +265,21 @@ public class Controleur  {
 			}
 			else {                                                //Dans ce cas, on supprime le dernier élément accumulé
 				accumulateur.backspace();
-				if (affichage[2]!="") {
+				if (affichage[0]!="") {
 					if (! stockageTemporaire.isEmpty()) {
 						int taille= stockageTemporaire.size();
-						affichage[2]= affichage[1];
-						affichage[1]= affichage[0];
-						affichage[0]= stockageTemporaire.get(taille-1);
+						affichage[0]= affichage[1];
+						affichage[1]= affichage[2];
+						affichage[2]= stockageTemporaire.get(taille-1);
 						stockageTemporaire.remove(taille-1);
 					}
-					else affichage[2]="";
+					else {
+						affichage[0]= affichage[1];
+						affichage[1]= affichage[2];
+						affichage[2]= "";
+					}
+					
 				}
-				else if (affichage[1]!="") affichage[1]="";
-				else if (affichage[0]!="") affichage[0]="";
 				GUI.nouvelleVue(affichage);
 				GUI.setEcranAffichage("");
 			}
