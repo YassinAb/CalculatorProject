@@ -122,7 +122,7 @@ public class GUI extends Application {
 	Line line2 = new Line(300,150,500,150);
 
 
-
+	// Création des getter et setter de l'écran d'affichage privé
 	
 	public static String getEcranAffichage() {
 		return ecranAffichage.getText();
@@ -134,6 +134,7 @@ public class GUI extends Application {
 	
 
 	
+	// Actualisation de la vue à l'aide du nouveau placement dans la liste affichage
 	
 	public static void nouvelleVue(String[] affichage) {
 		
@@ -152,7 +153,7 @@ public class GUI extends Application {
 
 	public void start(Stage primaryStage) throws Exception {
 			
-		primaryStage.setTitle("calculatrice Polonaise");
+		primaryStage.setTitle("RPN Calculator");
 		
 		
 		
@@ -173,7 +174,7 @@ public class GUI extends Application {
 		plageNombres.setHgap(10);
 		plageNombres.setVgap(10);
 		
-		//PLacer les boutons dans le clavier
+		//Placement des boutons dans la grille
 		
 		plageNombres.add(toucheSept, 1, 0,1,1);
 		plageNombres.add(toucheNeuf, 3, 0,1,1);
@@ -195,7 +196,7 @@ public class GUI extends Application {
 		plageNombres.add(toucheReset, 3,4,1,1 );
 		plageNombres.add(toucheNeg, 2, 4,1,1);
 		
-		// affichage de la fenêtre; avec création d'une scène et choix de ses dimentions
+		// affichage de la fenêtre avec création d'une scène et choix de ses dimensions
 		
 		root.getChildren().addAll(pileUn,line1,pileDeux,line2, pileTrois,line0,ecranAffichage, plageNombres);
 
@@ -204,6 +205,7 @@ public class GUI extends Application {
 		primaryStage.show();
 
 	}
+	//lancement de l'interface graphique
 	
 	public static void main(String[] args) {
 		launch(args);

@@ -4,7 +4,7 @@ public interface IAccumulateur {
 	
 	public void push(Double nombreChoisi);
 	
-	public void drop();
+	public void drop();  
 	
 	public void swap();
 	

@@ -84,8 +84,8 @@ public class Controleur  {
 		GUI.setEcranAffichage(nombreChoisi);	
 	}
 	
-	/* On place la valeur accumulée dans les trois affichage possible 
-	   en fonction de l'emplacement disponible */
+	/* On place la valeur accumulée 
+	   en fonction de l'emplacement des autres placements */
 	
 	public void placerAffichage(String nombreChoisi) {
 		if (affichage[0]=="") affichage[0]=nombreChoisi;
@@ -107,32 +107,10 @@ public class Controleur  {
 			}
 		
 		}
-		/*
-		if (affichage[0]=="") {	
-			affichage[0]= nombreChoisi;
-		}
-	
-		else if (affichage[1]=="") {
-			affichage[1]= nombreChoisi;
-		}
-			                                                  
-		else if (affichage[2]=="") {
-			affichage[2]= nombreChoisi;
-		}
-		
-		 On stocke les elements de la pile dans une ArrayList 
-		   temporaire lorsque l'on accumule un nombre mais qu'il n'y a plus de place
-		
-		else if (affichage[2]!="" && affichage[1]!="" && affichage[0]!="") {
-			stockageTemporaire.add(affichage[0]);
-			affichage[0]= affichage[1];
-			affichage[1]= affichage[2];
-			affichage[2]= nombreChoisi;
-		}*/
 	}
 	
 	/* On actualise le placement après chaque accumulation ou opération.Lorsqu'un emplacement d'affichage
-	 se libère, si une valeur est cachée dans stockageTemporaire alors actualise le placement*/
+	 se libère, si une valeur est cachée dans stockageTemporaire alors on actualise le placement*/
 	
 	public void actualiserPlacementAffichage (String string) {
 		if (affichage[2]!="") {

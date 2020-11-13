@@ -7,11 +7,11 @@ public class Pile extends Stack {
 	
 	
 
-	Stack <Double> pile = new Stack <>();
+	Stack <Double> pile = new Stack <>();			//Instanciation de la Stack
 
 	public Pile() {}
 	
-	public void push(Double nombreChoisi) {
+	public void push(Double nombreChoisi) {			//Même rôle que dans Accumulateur
 		pile.push(nombreChoisi);
 	}
 	
